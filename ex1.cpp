@@ -10,7 +10,7 @@ struct Etudiant {
     int CNE;
     double notes[5];
 
-    // Méthode pour créer un étudiant
+  
     void creer(const string& nom, const string& prenom, int CNE, const double* notesArray) {
         this->nom = nom;
         this->prenom = prenom;
@@ -20,7 +20,7 @@ struct Etudiant {
         }
     }
 
-    // Méthode pour obtenir la plus grande note
+
     double getMaxNote() {
         double max = notes[0];
         for (int i = 1; i < 5; ++i) {
@@ -31,7 +31,7 @@ struct Etudiant {
         return max;
     }
 
-    // Méthode pour obtenir la plus petite note
+
     double getMinNote() {
         double min = notes[0];
         for (int i = 1; i < 5; ++i) {
@@ -42,7 +42,7 @@ struct Etudiant {
         return min;
     }
 
-    // Méthode pour obtenir la moyenne des notes
+
     double getMoyenneNote() {
         double somme = 0;
         for (int i = 0; i < 5; ++i) {
@@ -51,10 +51,9 @@ struct Etudiant {
         return somme / 5;
     }
 
-    // Méthode pour afficher les détails de l'étudiant
     void affiche() {
         cout << "Nom: " << nom << endl;
-        cout << "Prénom: " << prenom << endl;
+        cout << "PrÃ©nom: " << prenom << endl;
         cout << "CNE: " << CNE << endl;
         cout << "Plus grande note: " << getMaxNote() << endl;
         cout << "Plus petite note: " << getMinNote() << endl;
@@ -62,7 +61,7 @@ struct Etudiant {
         cout << "Quota de notes >= 10: " << getQuota() << "%" << endl;
     }
 
-    // Méthode pour obtenir le quota des notes >= 10
+   
     double getQuota() {
         int count = 0;
         for (int i = 0; i < 5; ++i) {
@@ -76,11 +75,10 @@ struct Etudiant {
 
 int main() {
     const int NB_ETUDIANTS = 3;
-    Etudiant etudiants[NB_ETUDIANTS]; // Créer un tableau de 3 étudiants
+    Etudiant etudiants[NB_ETUDIANTS];
 
-    // Remplir le tableau d'étudiants
     for (int i = 0; i < NB_ETUDIANTS; ++i) {
-        cout << "Entrer les informations pour l'étudiant " << (i + 1) << ":" << endl;
+        cout << "Entrer les informations pour l'Ã©tudiant " << (i + 1) << ":" << endl;
 
         string nom, prenom;
         int CNE;
@@ -89,7 +87,7 @@ int main() {
         cout << "Nom: ";
         cin >> nom;
 
-        cout << "Prénom: ";
+        cout << "PrÃ©nom: ";
         cin >> prenom;
 
         cout << "CNE: ";
@@ -101,12 +99,11 @@ int main() {
             cin >> notes[j];
         }
 
-        // Créer l'étudiant
+       
         etudiants[i].creer(nom, prenom, CNE, notes);
     }
 
-    // Afficher les détails de tous les étudiants
-    cout << "\nDétails des étudiants:" << endl;
+    cout << "\nDÃ©tails des Ã©tudiants:" << endl;
     for (const auto& etudiant : etudiants) {
         etudiant.affiche();
         cout << "---------------------------" << endl;
