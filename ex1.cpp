@@ -1,113 +1,87 @@
 #include <iostream>
-#include <string>
-#include <iomanip>
 
 using namespace std;
 
-struct Etudiant {
-    string nom;
-    string prenom;
-    int CNE;
-    double notes[5];
+class Etudiant{
+  int matricule;
+  string nom;
+  int nbrNotes;
+  float* tabNotes;
+  static int n;
 
-  
-    void creer(const string& nom, const string& prenom, int CNE, const double* notesArray) {
-        this->nom = nom;
-        this->prenom = prenom;
-        this->CNE = CNE;
-        for (int i = 0; i < 5; ++i) {
-            notes[i] = notesArray[i];
+  public :
+      Etudiant(){
+        matricule =0;
+        nom ="";
+        nbrNotes=0;
+        tabNotes = new float[nbrNotes];
+      }
+      Etudiant(string nom, int nb){
+        n++;
+        matricule = n;
+        this->nom =nom;
+        this->nbrNotes=nb;
+        tabNotes = new float(nbrNotes);
+      }
+      string getNom(){
+        return nom;
+      }
+      int getMatricule(){
+        return matricule;
+      }
+      string setNom(string nom1){
+        return nom1;
+      }
+      int setMatricule(int mat){
+        return mat;
+      }
+
+      void Saisie(){
+        cout <<"Remplissage du tableau:"<< endl;
+        for(int i=0;i<nbrNotes;i++){
+          cout << "note "<<i+1 <<": "<<endl;
+          cin>>tabNotes[i];
         }
-    }
+      }
+      void Affiche(){
+        cout <<"les elements du tableau:"<< endl;
+        cout << nom<< endl;
+        for(int i=0;i<nbrNotes;i++){
 
-
-    double getMaxNote() {
-        double max = notes[0];
-        for (int i = 1; i < 5; ++i) {
-            if (notes[i] > max) {
-                max = notes[i];
-            }
+          cout << "note"<<i+1<<":";
+          cout <<tabNotes[i]<< endl;
         }
-        return max;
-    }
-
-
-    double getMinNote() {
-        double min = notes[0];
-        for (int i = 1; i < 5; ++i) {
-            if (notes[i] < min) {
-                min = notes[i];
-            }
+      }
+      float Moyenne(){
+        float s=0;
+        for(int i=0;i<nbrNotes;i++){
+            s+=tabNotes[i];
         }
-        return min;
-    }
+        return s/nbrNotes;}
 
-
-    double getMoyenneNote() {
-        double somme = 0;
-        for (int i = 0; i < 5; ++i) {
-            somme += notes[i];
-        }
-        return somme / 5;
-    }
-
-    void affiche() {
-        cout << "Nom: " << nom << endl;
-        cout << "Prénom: " << prenom << endl;
-        cout << "CNE: " << CNE << endl;
-        cout << "Plus grande note: " << getMaxNote() << endl;
-        cout << "Plus petite note: " << getMinNote() << endl;
-        cout << "Moyenne: " << setprecision(2) << fixed << getMoyenneNote() << endl;
-        cout << "Quota de notes >= 10: " << getQuota() << "%" << endl;
-    }
-
-   
-    double getQuota() {
-        int count = 0;
-        for (int i = 0; i < 5; ++i) {
-            if (notes[i] >= 10) {
-                count++;
-            }
-        }
-        return (count / 5.0) * 100;
-    }
+     bool estValide(int moyenne){
+       if(moyenne >=10){
+         return true;
+       }else{
+         return false ;
+    }}
 };
-
-int main() {
-    const int NB_ETUDIANTS = 3;
-    Etudiant etudiants[NB_ETUDIANTS];
-
-    for (int i = 0; i < NB_ETUDIANTS; ++i) {
-        cout << "Entrer les informations pour l'étudiant " << (i + 1) << ":" << endl;
-
-        string nom, prenom;
-        int CNE;
-        double notes[5];
-
-        cout << "Nom: ";
-        cin >> nom;
-
-        cout << "Prénom: ";
-        cin >> prenom;
-
-        cout << "CNE: ";
-        cin >> CNE;
-
-        cout << "Entrer 5 notes:" << endl;
-        for (int j = 0; j < 5; ++j) {
-            cout << "Note " << (j + 1) << ": ";
-            cin >> notes[j];
-        }
-
-       
-        etudiants[i].creer(nom, prenom, CNE, notes);
+int Etudiant :: n=0;
+int main()
+{
+     Etudiant E("Imane",4);
+    cout << E.getNom() << endl;
+    cout << E.getMatricule()<< endl;
+    E.Saisie();
+    E.Affiche();
+    float m=E.Moyenne();
+    cout<< "la moyenne est:"<< m<< endl;
+    if(E.estValide(m)){
+        cout<<"admis";
+    }else{
+        cout<<"Non admis";
     }
 
-    cout << "\nDétails des étudiants:" << endl;
-    for (const auto& etudiant : etudiants) {
-        etudiant.affiche();
-        cout << "---------------------------" << endl;
-    }
 
     return 0;
 }
