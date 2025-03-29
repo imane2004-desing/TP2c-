@@ -1,110 +1,86 @@
 #include <iostream>
 #include <cmath>
-#include <iomanip>
 
 using namespace std;
 
-struct Point {
+struct Point
+{
     float x;
     float y;
 
-    // Fonction pour saisir les coordonnées d'un point
-    void saisie(float a, float b) {
-        x = a;
-        y = b;
+public :
+    point ( float a,float b)
+    {
+        x=a;
+        y=b;
     }
+    void afficher()
+    {
 
-    // Fonction pour déplacer le point
-    void depacer(float a, float b) {
+        cout<<"Point ( "<<x <<";"<<y<<")"<< endl;
+    }
+    void deplacer(float a, float b)
+    {
         x += a;
         y += b;
     }
 
-    // Fonction pour obtenir l'abscisse
-    float abscisse() {
+    float getX()
+    {
         return x;
     }
 
-    // Fonction pour obtenir l'ordonnée
-    float ordonnee() {
+    float getY()
+    {
         return y;
     }
-
-    // Fonction pour comparer deux points
-    bool comparer(Point p) {
+    void setX(float a)
+    {
+        x=a;
+    }
+    void setY(float b)
+    {
+        y=b;
+    }
+    bool comparer(Point p)
+    {
         return (x == p.x && y == p.y);
     }
-
-    // Fonction pour calculer la distance entre deux points
-    float calcule(Point p) {
+    float calculer(Point p)
+    {
         return sqrt(pow(x - p.x, 2) + pow(y - p.y, 2));
-    }
-
-    // Fonction pour afficher les coordonnées du point
-    void affiche() {
-        cout << "(" << x << ", " << y << ")";
     }
 };
 
-int main() {
-    Point p1, p2, p3;
-
-    // Saisir les coordonnées des points
-    p1.saisie(3.0, 4.0);
-    p2.saisie(6.0, 8.0);
-    p3.saisie(3.0, 4.0); // p3 a les mêmes coordonnées que p1
-
-    // Afficher les coordonnées
-    cout << "Point P1: ";
-    p1.affiche();
-    cout << endl;
-
-    cout << "Point P2: ";
-    p2.affiche();
-    cout << endl;
-
-    cout << "Point P3: ";
-    p3.affiche();
-    cout << endl;
-
-    // Calculer la distance de P1 à l'origine
-    Point origine = {0, 0};
-    cout << "Distance de P1 à l'origine: " << p1.calcule(origine) << endl;
-
-    // Calculer la distance entre P1 et P2
-    cout << "Distance entre P1 et P2: " << p1.calcule(p2) << endl;
-
-    // Déplacer P2 par (20, 13)
-    p2.depacer(20, 13);
-    cout << "P2 après déplacement: ";
-    p2.affiche();
-    cout << endl;
-
-    // Vérifier si P1 et P3 coïncident
-    if (p1.comparer(p3)) {
-        cout << "P1 et P3 coïncident." << endl;
-    } else {
-        cout << "P1 et P3 ne coïncident pas." << endl;
+int main()
+{
+    Point p1, p2;
+    p1.x=3;
+    p1.y=4;
+    p2.x=6;
+    p2.y=7;
+    p1.afficher();
+    p2.afficher();
+    cout<<"\nApres le deplacement :"<< endl;
+    p1.deplacer(2,2);
+    p1.afficher();
+    p2.deplacer(2,2);
+    p2.afficher();
+    cout<<"\nl'abscisse de chaque point  :"<< endl;
+    cout<< p1.getX()<< endl;
+    cout<< p2.getX()<< endl;
+    cout<<"\nl'ordonnee de chaque point  :"<< endl;
+    cout<< p1.getY()<< endl;
+    cout<< p2.getY()<< endl;
+    if (p1.comparer(p2))
+    {
+        cout <<"\np1 et p2 coincident." << endl;
     }
-
-    // Vérifier les points les plus proches
-    float distanceP1P2 = p1.calcule(p2);
-    float distanceP1P3 = p1.calcule(p3);
-    float distanceP2P3 = p2.calcule(p3);
-
-    cout << "Les distances entre les points:" << endl;
-    cout << "P1 et P2: " << distanceP1P2 << endl;
-    cout << "P1 et P3: " << distanceP1P3 << endl;
-    cout << "P2 et P3: " << distanceP2P3 << endl;
-
-    // Trouver les points les plus proches
-    if (distanceP1P2 < distanceP1P3 && distanceP1P2 < distanceP2P3) {
-        cout << "Les points les plus proches sont P1 et P2." << endl;
-    } else if (distanceP1P3 < distanceP1P2 && distanceP1P3 < distanceP2P3) {
-        cout << "Les points les plus proches sont P1 et P3." << endl;
-    } else {
-        cout << "Les points les plus proches sont P2 et P3." << endl;
+    else
+    {
+        cout <<"\np1 et p2 ne coincident pas." << endl;
     }
-
+    float distanceP1P2 = p1.calculer(p2);
+    cout <<"\nDistance de p1 a p2 : " << distanceP1P2 <<" cm"<< endl;
     return 0;
 }
